@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html> 
+
+<head>
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.2.0/split.min.js"></script>
+
+<script type="module">
+
+	 Split(['#a', '#b'], {
+	 		sizes: [57, 43],
+	        gutterSize: 8,
+	        cursor: 'col-resize'
+	    });
+
+	    Split(['#containerRightUp', '#containerRightDown'], {
+	        direction: 'vertical',
+	        sizes: [50, 50],
+	        gutterSize: 8,
+	        cursor: 'row-resize'
+	    });
+
+		Split(['#bySchooling', '#byBourse'], {
+	        direction: 'horizontal',
+	        sizes: [50, 50],
+	        gutterSize: 8,
+	        cursor: 'col-resize'
+	    });
+
+	// Load the Observable runtime and inspector.
+	import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+	
+	// Your notebook, compiled as an ES module.
+	import notebook from "https://api.observablehq.com/@alexandrebc/trabalho-final.js?v=3";
+
+	new Runtime().module(notebook, name => {
+	  if (name === "mapView") return new Inspector(document.querySelector("#mapView"));
+	  else if (name === "byAgeRange") return new Inspector(document.querySelector("#byAgeRange"));
+	  else if (name === "bySchooling") return new Inspector(document.querySelector("#bySchooling"));
+	  else if (name === "byBourse") return new Inspector(document.querySelector("#byBourse"));
+	  else if (name === "geojson") return new Inspector(document.querySelector("#bairros"));
+	});
+
+
+	</script>
+
+
+</head>
+
+
+	<body>
+		<div id="a" class="split split-horizontal">
+		    <div id="mapView"></div>
+			<div id="bairros"></div>
+		</div>
+
+		<div id="b" class="split split-horizontal">
+	    	<div class="split content" id="containerRightUp" style="background-color: #00ba13;">
+	    		<div class="split content" id="byAgeRange" ></div>
+	    	</div>
+
+			<div class="split content" id="containerRightDown" style="background-color: #00ba13;">
+				<div class="split split-horizontal" id="bySchooling"></div>	
+				<div class="split split-horizontal" id="byBourse"></div>
+			</div>
+		</div>
+	</body>
+
+</html>
